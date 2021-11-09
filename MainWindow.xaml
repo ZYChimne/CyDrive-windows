@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CyDrive"
         mc:Ignorable="d"
-        Title="CyDirve" Height="1200" Width="1600">
+        WindowStartupLocation="CenterScreen"
+        Title="CyDirve" Height="600" Width="800">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -33,17 +34,17 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Background="LightGray">
                     <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="9*"/>
-                            <RowDefinition Height="0.5*"/>
-                            <RowDefinition Height="0.5*"/>
-                        </Grid.RowDefinitions>
-                        <Button Grid.Row="0" Content="我的文件" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Background="LightGray"/>
-                        <Button Grid.Row="1" Content="最近" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Background="LightGray"/>
-                        <TextBox Grid.Row="3" Text="容量" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Background="LightGray"/>
-                        <ProgressBar Grid.Row="4"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Background="LightGray" Value="30" Height="30" Width="150" Foreground="SkyBlue"/>
-                    </Grid>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Content="我的文件" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Background="LightGray"/>
+                    <Button Grid.Row="1" Content="最近" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Background="LightGray"/>
+                    <Button Grid.Row="3" Name="UsageButton" Content="容量" HorizontalAlignment="Center" FontSize="12" Background="LightGray" Click="Usage_Click" Margin="20,0,20,0"/>
+                    <ProgressBar Grid.Row="4" Name="UsageBar" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Background="LightGray" Value="30" Height="30" Width="150" Foreground="SkyBlue"/>
+                </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.5*"/>
@@ -72,7 +73,7 @@
                         <Button Grid.Column="5" Content="重命名" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Row="1">
-                        
+
                     </Grid>
                 </Grid>
             </Grid>

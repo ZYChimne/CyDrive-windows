@@ -13,5 +13,7 @@ namespace CyDrive
     /// </summary>
     public partial class App : Application
     {
+
+/*        public CyDriveClient client = new CyDriveClient();*/
     }
 }
