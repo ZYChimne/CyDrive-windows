@@ -73,7 +73,7 @@
                         <Button Grid.Column="5" Content="重命名" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Row="1">
-
+                        <ScrollViewer x:Name="FileList"/>
                     </Grid>
                 </Grid>
             </Grid>

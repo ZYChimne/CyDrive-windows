@@ -36,9 +36,9 @@ namespace CyDrive
         private async void fetchFileInfoList()
         {
             fileInfoList = await Config.client.ListDirAsync("");
-            foreach(FileInfo info in fileInfoList)
+            foreach (FileInfo info in fileInfoList)
             {
-                Debug.WriteLine(info.FilePath);
+                Debug.WriteLine(info.GetType());
             }
         }
         private void updateUsageAndCap()
@@ -52,5 +52,38 @@ namespace CyDrive
             Debug.WriteLine("Clicked");
             updateUsageAndCap();
         }
+        private void loadFileGridList()
+        {
+            FileGridList.Children.Clear();
+            foreach (FileInfo info in fileInfoList)
+            {
+                FileGridList.Children.Add(new FileGrid(info));
+            }
+        }
     }
+
+    public class FileGrid :Grid
+    {
+        string filename;
+        string suffix;
+        string filetype;
+        public FileGrid(FileInfo info)
+        {
+            int splitIndex = info.FilePath.LastIndexOf('.');
+            if(splitIndex > 0)
+            {
+                filename = info.FilePath.Substring(0, splitIndex);
+                suffix = info.FilePath.Substring(splitIndex + 1);
+                filetype = Config.getFileTypeIcon(suffix);
+            }
+            else
+            {
+                filename = info.FilePath;
+                suffix = "";
+                filetype = "unknown";
+            }
+
+        }
+    }
+
 }
