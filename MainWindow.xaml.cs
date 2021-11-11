@@ -27,19 +27,23 @@ namespace CyDrive
         public MainWindow()
         {
             InitializeComponent();
+            Debug.WriteLine(Config.client.Account.Name);
+            Username.Content = Config.client.Account.Name;
             updateUsageAndCap();
             new Thread(() =>
             {
                 fetchFileInfoList();
             }).Start();
+            
         }
         private async void fetchFileInfoList()
         {
             fileInfoList = await Config.client.ListDirAsync("");
             foreach (FileInfo info in fileInfoList)
             {
-                Debug.WriteLine(info.GetType());
+                Debug.WriteLine(info.FilePath);
             }
+            Dispatcher.Invoke(() => loadFileGridList());
         }
         private void updateUsageAndCap()
         {
@@ -58,6 +62,7 @@ namespace CyDrive
             foreach (FileInfo info in fileInfoList)
             {
                 FileGridList.Children.Add(new FileGrid(info));
+                break;
             }
         }
     }
@@ -67,14 +72,18 @@ namespace CyDrive
         string filename;
         string suffix;
         string filetype;
+        Image fileImage = new Image();
+        TextBlock textBlock = new TextBlock();
         public FileGrid(FileInfo info)
         {
+            
             int splitIndex = info.FilePath.LastIndexOf('.');
             if(splitIndex > 0)
             {
-                filename = info.FilePath.Substring(0, splitIndex);
+                filename = info.FilePath.Substring(1, splitIndex-1);
                 suffix = info.FilePath.Substring(splitIndex + 1);
                 filetype = Config.getFileTypeIcon(suffix);
+                Debug.WriteLine(filetype);
             }
             else
             {
@@ -82,7 +91,17 @@ namespace CyDrive
                 suffix = "";
                 filetype = "unknown";
             }
-
+            fileImage.Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "../../../../assets/Icons/"+filetype+".png"));
+            textBlock.Text = filename;
+            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
+            RowDefinition rowDefinition1 = new RowDefinition();
+            RowDefinition rowDefinition2 = new RowDefinition();
+            SetRow(fileImage, 0);
+            SetRow(textBlock, 1);
+            RowDefinitions.Add(rowDefinition1);
+            RowDefinitions.Add(rowDefinition2);
+            Children.Add(fileImage);
+            Children.Add(textBlock);
         }
     }
 
