@@ -35,7 +35,7 @@ namespace CyDrive
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("Clicked");
+            Debug.WriteLine("Login Clicked");
             account.Email = Email.Text;
             account.Password = Utils.PasswordHash(Password.Text);
             bool res = await Config.client.LoginAsync(account);

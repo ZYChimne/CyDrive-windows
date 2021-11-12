@@ -39,7 +39,7 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="2">
-            <Button Name="Login_Button" Content="登录" Height="120" Width="300" FontSize="60" VerticalAlignment="Top" HorizontalAlignment="Center" Background="White" BorderThickness="0" Click="Login_Click"/>
+            <Button Name="Login_Button" Content="登录" Height="60" Width="120" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" Background="White" BorderThickness="0" Click="Login_Click"/>
         </Grid>
     </Grid>
 </Window>
