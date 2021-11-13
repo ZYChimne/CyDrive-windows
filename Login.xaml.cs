@@ -29,7 +29,7 @@ namespace CyDrive
             if (Config.DEBUG)
             {
                 Email.Text = Config.DEFAULT_EMAIL;
-                Password.Text = Config.DEFAULT_PASSWORD;
+                Password.Password = Config.DEFAULT_PASSWORD;
             }
         }
 
@@ -37,7 +37,7 @@ namespace CyDrive
         {
             Debug.WriteLine("Login Clicked");
             account.Email = Email.Text;
-            account.Password = Utils.PasswordHash(Password.Text);
+            account.Password = Utils.PasswordHash(Password.Password);
             bool res = await Config.client.LoginAsync(account);
             Debug.WriteLine(res);
             if (res)
