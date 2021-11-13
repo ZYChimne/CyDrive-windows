@@ -13,7 +13,7 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="CyDrive" FontSize="150" Foreground="SkyBlue" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        <Label Grid.Row="0" Content="CyDrive" FontSize="120" Foreground="SkyBlue" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,30"/>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="6*"/>
@@ -25,8 +25,8 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Text="Email" Grid.Column="0" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 30, 0"/>
-                <TextBox Name="Email"  Text="Email" Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60, 0, 0, 0" Width="480" IsReadOnly="False"/>
+                <TextBox Text="Email" Grid.Column="0" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 0, 0" BorderThickness="0"/>
+                <TextBox Name="Email"  Text="Email" Grid.Column="1" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30, 0, 0, 0" Width="270" IsReadOnly="False"/>
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -34,12 +34,12 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Text="密码" Grid.Column="0" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 30, 0"/>
-                <TextBox Name="Password" Text="密码" Grid.Column="1" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="60, 0, 0, 0" Width="480" IsReadOnly="False"/>
+                <TextBox Text="密码" Grid.Column="0" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 0, 0" BorderThickness="0"/>
+                <PasswordBox Name="Password" Password="" Grid.Column="1" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30, 0, 0, 0" Width="270"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="2">
-            <Button Name="Login_Button" Content="登录" Height="60" Width="120" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Center" Background="White" BorderThickness="0" Click="Login_Click"/>
+            <Button Name="Login_Button" Content="登录" Height="60" Width="120" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Center" Background="SkyBlue" BorderThickness="0" Foreground="White" Click="Login_Click" Margin="0,30,0,0"/>
         </Grid>
     </Grid>
 </Window>
