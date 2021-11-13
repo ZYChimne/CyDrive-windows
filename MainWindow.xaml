@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CyDrive"
         mc:Ignorable="d"
-        Title="CyDirve" Height="1200" Width="1600">
+        WindowStartupLocation="CenterScreen"
+        Title="CyDirve" Height="600" Width="800">
     <Grid>
         <Grid>
             <Grid.RowDefinitions>
@@ -20,10 +21,10 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="User" Grid.Column="0" FontSize="45" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBox Text="搜索" Grid.Column="1" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGray" Foreground="Gray" Padding="100, 10, 100, 10" IsReadOnly="False"/>
-                    <Label Content="任务" Grid.Column="2" FontSize="30" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Label Content="设置" Grid.Column="3" FontSize="30" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Name ="Username" Content="User" Grid.Column="0" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBox Text="搜索" Grid.Column="1" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGray" Foreground="Gray" Padding="100, 10, 100, 10" IsReadOnly="False"/>
+                    <Label Content="任务" Grid.Column="2" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Content="设置" Grid.Column="3" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">
@@ -33,21 +34,23 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0" Background="LightGray">
                     <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="9*"/>
-                            <RowDefinition Height="0.5*"/>
-                            <RowDefinition Height="0.5*"/>
-                        </Grid.RowDefinitions>
-                        <Button Grid.Row="0" Content="我的文件" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Background="LightGray"/>
-                        <Button Grid.Row="1" Content="最近" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Background="LightGray"/>
-                        <TextBox Grid.Row="3" Text="容量" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Background="LightGray"/>
-                        <ProgressBar Grid.Row="4"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Background="LightGray" Value="30" Height="30" Width="150" Foreground="SkyBlue"/>
-                    </Grid>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="9*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Content="我的文件" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Background="LightGray"/>
+                    <Button Grid.Row="1" Content="最近" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Background="LightGray"/>
+                    <Button Grid.Row="3" Name="UsageButton" Content="容量" HorizontalAlignment="Center" FontSize="12" Background="LightGray" Click="Usage_Click" Margin="0,0,0,0"/>
+                    <ProgressBar Grid.Row="4" Name="UsageBar" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" Background="LightGray" Value="30" Height="30" Width="165" Foreground="SkyBlue"/>
+                </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="11.5*"/>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="10.5*"/>
+                        <RowDefinition Height="0.5*"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
@@ -64,15 +67,37 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="新建" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Button Grid.Column="1" Content="上传" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Button Grid.Column="2" Content="下载" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Button Grid.Column="3" Content="移动到" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Button Grid.Column="4" Content="复制到" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <Button Grid.Column="5" Content="重命名" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button Grid.Column="0" Content="新建" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button Grid.Column="1" Content="上传" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button Grid.Column="2" Content="下载" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button Grid.Column="3" Content="移动到" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button Grid.Column="4" Content="复制到" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <Button Grid.Column="5" Content="重命名" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
-                    <Grid Grid.Row="1">
-                        
+                    <Grid Name="DirList" Grid.Row="1">
+
+                    </Grid>
+                    <Grid Name="FileGridList" Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1" Content="上一页" FontSize="12" VerticalAlignment="Center" Background="White" BorderThickness="0"/>
+                        <Button Grid.Column="2" Content="下一页" FontSize="12" VerticalAlignment="Center" Background="White" BorderThickness="0"/>
                     </Grid>
                 </Grid>
             </Grid>

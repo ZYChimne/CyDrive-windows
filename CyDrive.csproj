@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CyDriveSDK" Version="1.5.1" />
+    <PackageReference Include="CyDriveSDK" Version="1.5.3" />
   </ItemGroup>
 
 </Project>
