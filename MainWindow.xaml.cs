@@ -131,14 +131,14 @@ namespace CyDrive
             }
             else
             {
+
                 Debug.WriteLine("Start Downloading " + fileGrid.shortFilename);
-                string downloadPath = "C:/Users/ZYC/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
-                //string downloadPath = "~/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
-                Config.client.DownloadAsync(fileGrid.longFilename, "test.png").ContinueWith(async (task) =>
+                //string downloadPath = "C:/Users/ZYC/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
+                string downloadPath = "~/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
+                Config.client.DownloadAsync(fileGrid.longFilename, "dir/test.jpg").ContinueWith(async (task) =>
                 {
                     downloadTasks.Add(await task);
                 });
-                //Debug.WriteLine(res.FileInfo.FilePath);
                 /*Process.Start(downloadPath);*/
             }
         }
