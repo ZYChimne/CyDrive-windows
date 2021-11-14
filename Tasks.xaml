@@ -12,8 +12,8 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
-        <Button Content="返回" Grid.Row="0" BorderThickness="0" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Background="White" Margin="60, 0, 0, 0"/>
-        <Label Content="任务列表" Grid.Row="1" FontSize="180" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="SkyBlue"/>
+        <Button Content="返回" Grid.Row="0" BorderThickness="0" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Background="White" Margin="60, 0, 0, 0"/>
+        <Label Content="任务列表" Grid.Row="1" FontSize="90" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="SkyBlue"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="4*"/>
@@ -26,9 +26,9 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="9*"/>
                 </Grid.RowDefinitions>
-                <Button Content="正在下载" Grid.Row="0" BorderThickness="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White"/>
-                <Button Content="正在上传" Grid.Row="1" BorderThickness="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White"/>
-                <Button Content="已完成" Grid.Row="2" BorderThickness="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White"/>
+                <Button Content="正在下载" Grid.Row="0" BorderThickness="0" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White"/>
+                <Button Content="正在上传" Grid.Row="1" BorderThickness="0" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White"/>
+                <Button Content="已完成" Grid.Row="2" BorderThickness="0" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White"/>
             </Grid>
         </Grid>
     </Grid>

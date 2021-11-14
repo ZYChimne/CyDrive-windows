@@ -27,6 +27,7 @@ namespace CyDrive
         private List<DataTask> downloadTasks = new List<DataTask>();
         private double dirBtnPosEnd = 6;
         private int dirCnt = 0;
+        private MessageWindow messageWindow = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -133,14 +134,23 @@ namespace CyDrive
             {
 
                 Debug.WriteLine("Start Downloading " + fileGrid.shortFilename);
-                //string downloadPath = "C:/Users/ZYC/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
-                string downloadPath = "~/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
-                Config.client.DownloadAsync(fileGrid.longFilename, "dir/test.jpg").ContinueWith(async (task) =>
+                string downloadPath = "C:/Users/ZYC/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
+                //string downloadPath = "~/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
+                Config.client.DownloadAsync(fileGrid.longFilename, downloadPath).ContinueWith(async (task) =>
                 {
                     downloadTasks.Add(await task);
                 });
-                /*Process.Start(downloadPath);*/
             }
+        }
+        private void MessageWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("MessageWindow Clicked");
+            if (messageWindow == null)
+            {
+                messageWindow = new MessageWindow(this);
+                messageWindow.Show();
+            }
+            Close();
         }
     }
     public class FileGrid : Grid
