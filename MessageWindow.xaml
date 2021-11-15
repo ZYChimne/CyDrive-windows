@@ -51,7 +51,7 @@
                         <RowDefinition Height="11*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
+                    <Grid Name="MsgDisplay" Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5*"/>
                             <ColumnDefinition Width="2*"/>
@@ -71,8 +71,8 @@
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-                        <Grid Name="PhoneMsgDisplay" Grid.Column="0"/>
-                        <Grid Name="PCMsgDisplay" Grid.Column="2"/>
+                        <Grid Grid.Column="0"/>
+                        <Grid Grid.Column="2"/>
                     </Grid>
                     <Grid  Grid.Row="1">
                         <Grid.ColumnDefinitions>

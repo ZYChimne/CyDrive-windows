@@ -33,6 +33,7 @@ namespace CyDrive
             Config.client.OnMessage += (sender, e) =>
             {
                 peerId = e.Message.Sender;
+                //Debug.WriteLine(e.Message.Sender);
                 Dispatcher.Invoke(() => OnMessageReceived(e.Message));
             };
             Config.client.ConnectMessageService();
@@ -47,14 +48,18 @@ namespace CyDrive
         {
             Debug.WriteLine("On Message Received");
             MessageGrid messageGrid = new MessageGrid(msg.Content, DeviceType.Phone, msgCnt);
-            PhoneMsgDisplay.Children.Add(messageGrid);
+            Grid.SetRow(messageGrid, msgCnt);
+            Grid.SetColumn(messageGrid, 0);
+            MsgDisplay.Children.Add(messageGrid);
             msgCnt++;
         }
         private void OnMessageSent(Message msg)
         {
             Debug.WriteLine("On Message Sent");
             MessageGrid messageGrid = new MessageGrid(msg.Content, DeviceType.PC, msgCnt);
-            PCMsgDisplay.Children.Add(messageGrid);
+            Grid.SetRow(messageGrid, msgCnt);
+            Grid.SetColumn(messageGrid, 2);
+            MsgDisplay.Children.Add(messageGrid);
             msgCnt++;
         }
     }
@@ -87,7 +92,6 @@ namespace CyDrive
                 columnDefinition2.Width = new GridLength(1, GridUnitType.Star);
                 SetColumn(messageTextBlock, 0);
                 SetColumn(deviceImage, 1);
-                SetRow(messageTextBlock, msgCnt);
             }
             else
             {
