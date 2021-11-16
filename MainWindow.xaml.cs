@@ -25,8 +25,13 @@ namespace CyDrive
     {
         private FileInfo[] fileInfoList = null;
         private List<DataTask> downloadTasks = new List<DataTask>();
+        List<DataTask> uploadTasks = new List<DataTask>();
+        List<DataTask> completeTasks = new List<DataTask>();
+        Tasks taskWindow = null;
+        Settings settingsWindow = null;
         private double dirBtnPosEnd = 6;
         private int dirCnt = 0;
+        private MessageWindow messageWindow = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -120,6 +125,20 @@ namespace CyDrive
             }).Start();
             AddDirButton(dirCnt, shortDir);
         }
+        private void TaskWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Task Window Clicked");
+            taskWindow = new Tasks(this, downloadTasks, uploadTasks, completeTasks);
+            if(!taskWindow.IsVisible) taskWindow.Show();
+            Hide();
+        }
+        private void SettingsWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Settings Window Clicked");
+            settingsWindow = new Settings(this);
+            if(!settingsWindow.IsVisible) settingsWindow.Show();
+            Hide();
+        }
         private void OnFileGridMouseDown(object sender, MouseEventArgs e)
         {
             FileGrid fileGrid = (FileGrid)sender;
@@ -133,14 +152,23 @@ namespace CyDrive
             {
 
                 Debug.WriteLine("Start Downloading " + fileGrid.shortFilename);
-                //string downloadPath = "C:/Users/ZYC/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
-                string downloadPath = "~/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
-                Config.client.DownloadAsync(fileGrid.longFilename, "dir/test.jpg").ContinueWith(async (task) =>
+                string downloadPath = "C:/Users/ZYC/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
+                //string downloadPath = "~/Downloads/" + fileGrid.shortFilename + "." + fileGrid.suffix;
+                Config.client.DownloadAsync(fileGrid.longFilename, downloadPath).ContinueWith(async (task) =>
                 {
                     downloadTasks.Add(await task);
                 });
-                /*Process.Start(downloadPath);*/
             }
+        }
+        private void MessageWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("MessageWindow Clicked");
+            if (messageWindow == null)
+            {
+                messageWindow = new MessageWindow(this);
+                messageWindow.Show();
+            }
+            Hide();
         }
     }
     public class FileGrid : Grid
