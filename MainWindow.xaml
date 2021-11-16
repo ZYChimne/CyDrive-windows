@@ -23,8 +23,8 @@
                     </Grid.ColumnDefinitions>
                     <Label Name ="Username" Content="User" Grid.Column="0" FontSize="24" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     <TextBox Text="搜索" Grid.Column="1" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGray" Foreground="Gray" Padding="90, 6, 90, 6" IsReadOnly="False"/>
-                    <Label Content="任务" Grid.Column="2" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Label Content="设置" Grid.Column="3" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Content="任务" Grid.Column="2" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Background="CornflowerBlue" BorderThickness="0" Click="TaskWindow_Click"/>
+                    <Button Content="设置" Grid.Column="3" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Background="CornflowerBlue" BorderThickness="0" Click="SettingsWindow_Click"/>
                 </Grid>
             </Grid>
             <Grid Grid.Row="1">

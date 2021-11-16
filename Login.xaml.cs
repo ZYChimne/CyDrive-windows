@@ -47,7 +47,7 @@ namespace CyDrive
                     mainWindow = new MainWindow();
                     mainWindow.Show();
                 }
-                Close();
+                Hide();
             }
             else
             {

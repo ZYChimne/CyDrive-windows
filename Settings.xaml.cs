@@ -17,9 +17,11 @@ namespace CyDrive
     /// </summary>
     public partial class Settings : Window
     {
-        public Settings()
+        MainWindow mainWindow = null;
+        public Settings(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
     }
 }

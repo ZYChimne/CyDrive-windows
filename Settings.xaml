@@ -8,16 +8,16 @@
         Title="Settings" Height="600" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="9.5*"/>
         </Grid.RowDefinitions>
-        <Button Content="返回" Grid.Row="0" BorderThickness="0" FontSize="30" HorizontalAlignment="Left" VerticalAlignment="Center" Background="White" Margin="60, 0, 0, 0"/>
-        <Label Grid.Row="1" Content="CyDrive" FontSize="180" Foreground="SkyBlue" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Content="返回" Grid.Row="0" BorderThickness="0" FontSize="12" HorizontalAlignment="Left" VerticalAlignment="Center" Background="White" Margin="60, 0, 0, 0"/>
+        <Label Grid.Row="1" Content="CyDrive" FontSize="60" Foreground="SkyBlue" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="10*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -25,8 +25,8 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="10*"/>
                 </Grid.RowDefinitions>
-                <Button Content="设置" Grid.Row="0" BorderThickness="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White"/>
-                <Button Content="关于" Grid.Row="1" BorderThickness="0" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White"/>
+                <Button Content="设置" Grid.Row="0" BorderThickness="0" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White"/>
+                <Button Content="关于" Grid.Row="1" BorderThickness="0" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White"/>
             </Grid>
         </Grid>
     </Grid>

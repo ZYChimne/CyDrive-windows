@@ -25,6 +25,10 @@ namespace CyDrive
     {
         private FileInfo[] fileInfoList = null;
         private List<DataTask> downloadTasks = new List<DataTask>();
+        List<DataTask> uploadTasks = new List<DataTask>();
+        List<DataTask> completeTasks = new List<DataTask>();
+        Tasks taskWindow = null;
+        Settings settingsWindow = null;
         private double dirBtnPosEnd = 6;
         private int dirCnt = 0;
         private MessageWindow messageWindow = null;
@@ -121,6 +125,20 @@ namespace CyDrive
             }).Start();
             AddDirButton(dirCnt, shortDir);
         }
+        private void TaskWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Task Window Clicked");
+            taskWindow = new Tasks(this, downloadTasks, uploadTasks, completeTasks);
+            if(!taskWindow.IsVisible) taskWindow.Show();
+            Hide();
+        }
+        private void SettingsWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Settings Window Clicked");
+            settingsWindow = new Settings(this);
+            if(!settingsWindow.IsVisible) settingsWindow.Show();
+            Hide();
+        }
         private void OnFileGridMouseDown(object sender, MouseEventArgs e)
         {
             FileGrid fileGrid = (FileGrid)sender;
@@ -150,7 +168,7 @@ namespace CyDrive
                 messageWindow = new MessageWindow(this);
                 messageWindow.Show();
             }
-            Close();
+            Hide();
         }
     }
     public class FileGrid : Grid

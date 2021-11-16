@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace CyDrive
 {
@@ -23,13 +25,18 @@ namespace CyDrive
         MainWindow mainWindow=null;
         List<DataTask> downloadTasks=new List<DataTask>();
         List<DataTask> uploadTasks = new List<DataTask>();
-        public Tasks(MainWindow mainWindow, List<DataTask> downloadTasks, List<DataTask> uploadTasks)
+        List<DataTask> completeTasks = new List<DataTask>();
+        public Tasks(MainWindow mainWindow, List<DataTask> downloadTasks, List<DataTask> uploadTasks, List<DataTask> completeTasks)
         {
             this.mainWindow=mainWindow;
             this.downloadTasks=downloadTasks;
             this.uploadTasks=uploadTasks;
+            this.completeTasks=completeTasks;
             InitializeComponent();
-            ShowTasks(downloadTasks);
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Tick;
+            timer.Start();
         }
         private void ShowTasks(List<DataTask> tasks)
         {
@@ -40,6 +47,21 @@ namespace CyDrive
                 Grid.SetRow(taskGrid, i);
                 TaskDisplay.Children.Add(taskGrid);
             }
+        }
+        private void Tick(object sender, EventArgs e)
+        {
+            switch (taskType)
+            {
+                case TaskType.DOWNLOAD:ShowTasks(downloadTasks);break;
+                case TaskType.UPLOAD: ShowTasks(uploadTasks); break;
+                case TaskType.COMPLETE: ShowTasks(completeTasks); break;
+            }
+        }
+
+        private void BackToMainWindow(object sender, RoutedEventArgs e)
+        {
+            mainWindow.Show();
+            Close();
         }
     }
 
@@ -71,23 +93,40 @@ namespace CyDrive
                 filetype = "unknown";
             }
             filesize = task.FileInfo.Size;
-            fileImage.Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "../../../../assets/Icons/" + filetype + ".png"));
-            filenameTextblock = new TextBlock();
-            filenameTextblock.Text = filename;
-            filenameTextblock.FontSize = 12;
-            progressbar = new ProgressBar();
-            progressbar.Maximum = filesize;
-            progressbar.Value = task.Offset;
-            progressbar.VerticalAlignment = VerticalAlignment.Center;
-            progressbar.HorizontalAlignment = HorizontalAlignment.Center;
-            percentageBlock = new TextBlock();
-            percentageBlock.Text = (task.Offset * 100 / filesize).ToString();
-            percentageBlock.FontSize = 12;
-            startButton = new Button();
-            startButton.Content = "开始";
-            startButton.Background = new SolidColorBrush(Colors.SkyBlue);
-            startButton.Foreground = new SolidColorBrush(Colors.White);
-            startButton.FontSize = 12;
+            fileImage = new Image
+            {
+                Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "../../../../assets/Icons/" + filetype + ".png"))
+            };
+            filenameTextblock = new TextBlock
+            {
+                Text = filename,
+                FontSize = 12,
+                TextWrapping = TextWrapping.Wrap,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            progressbar = new ProgressBar
+            {
+                Width = 60,
+                Height = 20,
+                Foreground = new SolidColorBrush(Colors.SkyBlue),
+                Maximum = filesize,
+                Value = task.Offset,
+                VerticalAlignment = VerticalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+            percentageBlock = new TextBlock
+            {
+                Text = (task.Offset * 100 / filesize).ToString(),
+                FontSize = 12,
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            startButton = new Button
+            {
+                Content = "暂停",
+                Background = new SolidColorBrush(Colors.SkyBlue),
+                Foreground = new SolidColorBrush(Colors.White),
+                FontSize = 12
+            };
             SetColumn(fileImage, 0);
             SetColumn(filenameTextblock, 1);
             SetColumn(progressbar, 3);
