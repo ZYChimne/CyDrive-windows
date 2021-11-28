@@ -1,16 +1,24 @@
 ﻿# CyDrive Windows
+
 ## User Interface
+
 ### Login
 
-![](assets/ReadMe/Login.jpg)
+![](assets/ReadMe/Login.png)
 
 ### File List
 
-![](assets/ReadMe/MainWindow.jpg)
+![](assets/ReadMe/MainWindow.png)
+
+### Messages
+
+![](assets/ReadMe/Messages.png)
+
 ### Tasks
 
-![](assets/ReadMe/Tasks.jpg)
+![](assets/ReadMe/Tasks.png)
 
-### Settings
+### Upload
 
-![](assets/ReadMe/Settings.jpg)
+![](assets/ReadMe/Upload.png)
+

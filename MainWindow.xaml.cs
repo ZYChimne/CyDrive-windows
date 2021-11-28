@@ -14,7 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using CyDrive.Models;
+using Microsoft.Win32;
 
 namespace CyDrive
 {
@@ -24,6 +26,7 @@ namespace CyDrive
     public partial class MainWindow : Window
     {
         private FileInfo[] fileInfoList = null;
+        private HashSet<string> dirlist = new HashSet<string>();
         private List<DataTask> downloadTasks = new List<DataTask>();
         List<DataTask> uploadTasks = new List<DataTask>();
         List<DataTask> completeTasks = new List<DataTask>();
@@ -32,6 +35,8 @@ namespace CyDrive
         private double dirBtnPosEnd = 6;
         private int dirCnt = 0;
         private MessageWindow messageWindow = null;
+        private string shortDir;
+        private string longDir;
         public MainWindow()
         {
             InitializeComponent();
@@ -39,6 +44,14 @@ namespace CyDrive
             Username.Content = Config.client.Account.Name;
             UpdateUsageAndCap();
             LoadFiles("", "Root");
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(15); //定时刷新文件
+            timer.Tick += Tick;
+            timer.Start();
+        }
+        private void Tick(object sender, EventArgs e)
+        {
+            LoadFiles(longDir, shortDir);
         }
         private async void FetchFileInfoList(string dir)
         {
@@ -96,6 +109,8 @@ namespace CyDrive
 
         private void AddDirButton(int cnt, string name)
         {
+            if(dirlist.Contains(name)) return;
+            dirlist.Add(name);
             Debug.WriteLine("Add Dir Button");
             Button btn = new Button();
             if (cnt == 0)
@@ -113,12 +128,15 @@ namespace CyDrive
             btn.VerticalAlignment = VerticalAlignment.Center;
             btn.HorizontalAlignment = HorizontalAlignment.Left;
             btn.Margin = new Thickness(dirBtnPosEnd, 0, 0, 0);
-            btn.Width = btn.Content.ToString().Length * 8;
+            //这里根据路径字符串长度计算大小，按照英文字母计算，如果出现中文路径可能出现显示不完整
+            btn.Width = btn.Content.ToString().Length * 8; 
             dirBtnPosEnd = 6 + btn.Width;
             DirList.Children.Add(btn);
         }
         private void LoadFiles(string longDir, string shortDir)
         {
+            this.longDir = longDir;
+            this.shortDir = shortDir;
             new Thread(() =>
             {
                 FetchFileInfoList(longDir);
@@ -138,6 +156,21 @@ namespace CyDrive
             settingsWindow = new Settings(this);
             if(!settingsWindow.IsVisible) settingsWindow.Show();
             Hide();
+        }
+        private void Upload_Click(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("Upload Clicked");
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            bool? res = fileDialog.ShowDialog();
+            if(res == true)
+            {
+                Debug.WriteLine("Start Upload");
+                Config.client.UploadAsync(fileDialog.FileName, "/").ContinueWith(async (task) =>
+                {
+                    uploadTasks.Add(await task);
+                });
+            }
+            
         }
         private void OnFileGridMouseDown(object sender, MouseEventArgs e)
         {

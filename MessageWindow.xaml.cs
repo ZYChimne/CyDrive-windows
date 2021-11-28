@@ -47,8 +47,8 @@ namespace CyDrive
         private void OnMessageReceived(Message msg)
         {
             Debug.WriteLine("On Message Received");
-            MessageGrid messageGrid = new MessageGrid(msg.Content, DeviceType.Phone, msgCnt);
-            Grid.SetRow(messageGrid, msgCnt);
+            MessageGrid messageGrid = new MessageGrid(msg.Content, DeviceType.Phone, msgCnt%12);
+            Grid.SetRow(messageGrid, msgCnt % 12);
             Grid.SetColumn(messageGrid, 0);
             MsgDisplay.Children.Add(messageGrid);
             msgCnt++;
@@ -56,7 +56,7 @@ namespace CyDrive
         private void OnMessageSent(Message msg)
         {
             Debug.WriteLine("On Message Sent");
-            MessageGrid messageGrid = new MessageGrid(msg.Content, DeviceType.PC, msgCnt);
+            MessageGrid messageGrid = new MessageGrid(msg.Content, DeviceType.PC, msgCnt % 12);
             Grid.SetRow(messageGrid, msgCnt);
             Grid.SetColumn(messageGrid, 2);
             MsgDisplay.Children.Add(messageGrid);

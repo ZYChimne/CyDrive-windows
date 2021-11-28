@@ -44,7 +44,7 @@ namespace CyDrive
             for (int i = 0; i < tasks.Count; i++)
             {
                 TaskGrid taskGrid = new TaskGrid(tasks[i]);
-                Grid.SetRow(taskGrid, i);
+                Grid.SetRow(taskGrid, i%6);
                 TaskDisplay.Children.Add(taskGrid);
             }
         }
